@@ -1,0 +1,12 @@
+name = "JuliaForIDM"
+uuid = "YOUR-UUID-HERE"
+authors = ["Your Name <your.email@example.com>"]
+version = "0.1.0"
+
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+
+[compat]
+julia = "1.9"

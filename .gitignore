@@ -1,0 +1,32 @@
+# Julia
+*.jl.*.cov
+*.jl.cov
+*.jl.mem
+/docs/build/
+/Manifest.toml
+/test/Manifest.toml
+
+# Quarto
+/.quarto/
+/_output/
+/_site/
+paper/_output/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage files
+/coverage/
+*.lcov
