@@ -1,12 +1,14 @@
 name = "JuliaForIDM"
-uuid = "YOUR-UUID-HERE"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Samuel Abbott <contact@samabbott.co.uk>"]
 version = "0.1.0"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
-DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
-Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+Turing = "fce5fe82-541a-59a6-adf8-730c64b5f9a0"
 
 [compat]
-julia = "1.9"
+Distributions = "0.25"
+DocStringExtensions = "0.9"
+Turing = "0.35"
+julia = "1.11"
