@@ -10,6 +10,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-paper:
     runs-on: ubuntu-latest
@@ -24,13 +30,10 @@ jobs:
       - name: Set up Julia
         uses: julia-actions/setup-julia@v1
         with:
-          version: '1.9'
+          version: "1.11"
 
-      - name: Install Julia dependencies
-        run: |
-          julia --project=. -e '
-            using Pkg
-            Pkg.instantiate()'
+      - uses: julia-actions/cache@v1
+      - uses: julia-actions/julia-buildpkg@v1
 
       - name: Render Paper
         run: |
@@ -40,11 +43,5 @@ jobs:
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: paper-pdf
-          path: paper/_output/paper.pdf
-
-      - name: Upload HTML artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: paper-html
-          path: paper/_output/paper.html
+          name: paper
+          path: paper/paper.pdf
