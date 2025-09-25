@@ -70,71 +70,29 @@ Exploration of ForwardDiff.jl, ReverseDiff.jl, and Zygote.jl, with focus on thei
 ## Data Science Tools
 
 Julia provides a comprehensive data science ecosystem that complements its scientific computing capabilities.
-DataFrames.jl offers powerful tabular data manipulation, while visualization libraries like Makie.jl enable publication-quality graphics.
+DataFrames.jl and DataFramesMeta.jl offers powerful tabular data manipulation, while visualization libraries like Makie.jl.
 The AlgebraOfGraphics.jl (AoG) package provides a grammar of graphics system, and the Tidier.jl ecosystem brings familiar data wrangling patterns to Julia users.
 These tools integrate seamlessly with the modeling and inference capabilities discussed above, enabling end-to-end workflows from data preparation through analysis and visualization.
 
 ## Case Studies
 
+### Case Study 1: Compartmental Susceptible-Exposed-Infectious-Recovered (SEIR) Model with time-varying transmission rate
 
-### Case study 1: Time-varying reproduction number estimation
-
-- Should this be motivated by a real-world problem?
-
-1. Renewal Process Model
-   - Mathematical specification of renewal equation
-   - Implementation in Julia code
-   - Simulate sample trajectories
-   - Prior predictive checks on reproduction patterns
-   - Fit to simulated data and assess performance
-
-2. Time-varying Reproduction Number
-   - Define autoregressive process model
-   - Generate sample reproduction number trajectories
-   - Evaluate prior assumptions through visualization
-   - Fit AR process to simulated data
-   - Validate parameter recovery
-
-3. Delay Distribution Model
-   - Specify reporting delay distributions
-   - Sample delay patterns from model
-   - Check prior predictions of delay structure
-   - Estimate delay parameters from simulated data
-   - Compare estimated vs true delays
-
-4. Observation Model
-   - Define negative binomial observation process
-   - Generate sample observed case counts
-   - Assess prior predictive distribution of counts
-   - Fit observation model to simulated data
-   - Evaluate overdispersion estimation
-
-5. Complete Model Integration
-   - Combine all components into full model
-   - Generate end-to-end simulated epidemic
-   - Comprehensive prior predictive checks
-   - Full posterior inference on simulated data
-   - Assess overall parameter recovery and fit
-
-### Case Study 2: Compartmental Susceptible-Exposed-Infectious-Recovered (SEIR) Model with time-varying transmission rate
-
-- Should this be motivated by a real-world problem?
 1. ODE Model Specification
-   - Define SEIR differential equations using ModelingToolkit.jl and SciML ecosystem
+   - Define SEIR differential equations using SciML ecosystem
    - Implement core compartmental structure
    - Validate numerical stability and solver choice
 
 2. Time-varying Transmission Rate
-   - Reuse AR(1) process model from Case Study 1 for transmission rate β(t)
+   - AR(1) process model for transmission rate β(t)
    - Connect latent AR process to ODE system dynamics
    - Leverage existing parameter validation from previous case
 
 3. Observation Process
-   - Apply established negative binomial observation model from Case Study 1
+   - Apply negative binomial observation model
    - Extend observation layer to capture:
      - Incidence data from E→I transitions
      - Prevalence data from I compartment
-   - Reuse validated likelihood functions and priors
 
 4. Complete Model Integration
    - Combine deterministic ODE backbone with stochastic components
@@ -143,10 +101,23 @@ These tools integrate seamlessly with the modeling and inference capabilities di
    - Implement efficient Bayesian inference pipeline
 
 5. Model Validation
-   - Compare with baseline constant-β SEIR implementation
-   - Assess computational efficiency of combined approach
-   - Evaluate parameter identifiability under different data scenarios
-   - Analyze robustness to misspecification
+   - Simulate data from the model
+   - Fit to the simulated data i.e. SBC
+   - Simulate a known beta scenario
+   - Fit and recover from it.
+
+### Case study 2: TBD
+
+Potential options:
+
+- Petri net composition of a SEIR model with age structure and variant dynamics. Simulate from and integrate into Turing for fitting. Something like: https://github.com/epirecipes/EpiCats/blob/main/pn_stratify_ageclasses/pn_stratify_ageclasses.md but extended.
+- Agent.jl model to Gen.jl via Genify.jl (https://github.com/probcomp/Genify.jl)
+- Neural ODEs: SEIR w/ AR + NN interaction terms: https://github.com/vboussange/HybridDynamicModels.jl
+- UDEs SEIR with NN on multiple datasets: https://www.sciencedirect.com/science/article/pii/S240584402401394X
+
+Some or all of the case studies likely need to include real data to convince applied modellers at the same time we want to keep the high level and schematic to make this achievable and to make sure we can communicate the key points.
+
+### Case study 3 : TBD
 
 ## Discussion
 

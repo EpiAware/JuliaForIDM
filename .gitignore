@@ -30,3 +30,5 @@ Thumbs.db
 # Coverage files
 /coverage/
 *.lcov
+resources
+claude.md
