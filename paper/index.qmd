@@ -86,17 +86,19 @@ Overview of R, Python, and other current tools, their strengths and limitations 
 
 - EpiCats.jl
 
-#### Probabilistic Programming
+#### Turing.jl
 
-##### Turing.jl
+- ecosystem
+- PPL
+- DynamicPPL
+- JuliaBugs
+- Inference
+- Other cool stuff?
 
-##### Gen.jl and RxInfer.jl
+#### Gen.jl and RxInfer.jl
 
-#### Model fitting
+#### Other Model Fitting Options
 
-- SciML for MLE
-- Turing for NUTs, PMCMC
-- Gen for SMC
 - Pigeons.jl parallel tempering - PPL agnostic
 - Others?
 
@@ -120,6 +122,12 @@ The AlgebraOfGraphics.jl (AoG) package provides a grammar of graphics system, an
 These tools integrate seamlessly with the modeling and inference capabilities discussed above, enabling end-to-end workflows from data preparation through analysis and visualization.
 
 ## Case Studies
+
+Julia has already been used successfully in several epidemiological modelling studies, demonstrating its growing adoption within the infectious disease modelling community.
+A notable example is the Epirecipes project [@epirecipes], originally a multi-language collection of epidemiological models, which has increasingly focused on Julia implementations.
+The project serves as a comprehensive "cookbook" of epidemiological models, showcasing Julia's versatility through diverse approaches to classical models like SIR: from compositional modelling using AlgebraicJulia's category theory framework (EpiCats), to Bayesian parameter estimation with Gen.jl, to advanced stochastic processes and bifurcation analysis.
+This demonstrates how Julia's ecosystem enables researchers to explore the same epidemiological concepts through multiple complementary computational paradigms whilst maintaining code reusability and mathematical rigour.
+The following case studies build upon this foundation to illustrate specific aspects of Julia's capabilities for infectious disease modelling.
 
 ### Case Study 1: Compartmental Susceptible-Exposed-Infectious-Recovered (SEIR) Model with time-varying transmission rate
 
