@@ -1,25 +1,44 @@
 ---
-title: "Julia for Applied Infectious Disease Modeling: A Case Study Analysis"
+title: "Julia for Applied Infectious Disease Modelling"
 author:
-  - name: Your Name
-    affiliations:
-      - Your Institution
+  - name: "Samuel Abbott"
+    affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+    email: "sam.abbott@lshtm.ac.uk"
+    orcid: "0000-0001-8057-8037"
+date: today
 abstract: |
-  This paper explores the potential of the Julia programming language in applied infectious disease modeling.
-  Through practical case studies, we demonstrate Julia's capabilities in implementing epidemiological models efficiently while maintaining readability and reproducibility.
+  This paper explores the potential of the Julia programming language in applied infectious disease modelling.
+  Through practical case studies, we demonstrate Julia's capabilities in implementing epidemiological models efficiently whilst maintaining readability and reproducibility.
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    linestretch: 1.5
+    keep-tex: false
+    number-sections: true
+    colorlinks: true
+bibliography: library.bib
+csl: https://www.zotero.org/styles/plos-computational-biology
+execute:
+  echo: true
+  warning: false
+  cache: true
+julia:
+  exeflags: ["--threads=4", "-O3"]
 ---
 
 ## Introduction
 Infectious disease modelling (IDM) plays a critical role in public health decision-making, from outbreak response to long-term planning.
-The field faces mounting challenges as models grow increasingly complex, incorporating real-time data streams, multiple intervention scenarios, and intricate biological mechanisms.
-This complexity manifests in both computational demands and code maintenance challenges, making it difficult to maintain software development best practices while responding rapidly to emerging threats.
+The field faces mounting challenges as models grow increasingly complex, incorporate a greater range of real-time data streams, and explore more intervention scenarios.
+This complexity manifests in both computational demands and code maintenance challenges, making it difficult to produce impactful work within the timescales that matter when responding rapidly to emerging threats.
 
 Modern outbreak response often requires rapid development and deployment of novel methods, frequently combining multiple modelling approaches to address emerging threats.
-This challenge is exemplified by tools like EpiNow2 and EpiNowcast, which despite their success, have struggled to integrate novel features and methodological advances from the broader modelling community.
-The difficulty in incorporating external contributions and specialised backend tools, even for established projects, highlights a fundamental challenge in the field.
+This challenge is highlighted by tools like EpiNow2 and EpiNowcast, which despite their success, have struggled to integrate novel features and methodological advances from the broader modelling community.
+The difficulty in incorporating external contributions and specialised backend tools, even for established projects, highlights a challenge in the field.
 While approaches like epidist, which builds on top of brms, demonstrate one path toward integration, such solutions are often limited in scope and only available for certain model types.
 
-These challenges extend beyond software integration to fundamental issues in epidemiological research practice.
+There are all so challenges in wider epidemiological research practice.
 The implementation of Bayesian workflows remains particularly challenging for many practitioners, requiring expertise in both statistical methodology and computational techniques.
 Furthermore, the current paradigm of research study development often requires teams to rebuild complex model frameworks from scratch, leading to duplicated effort, potential inconsistencies, and slower scientific progress.
 Even with advances in computing power, the persistent tension between computational performance and accessibility continues to impede both rapid outbreak response and longer-term research projects, where sophisticated models must be balanced against practical constraints of time and expertise.
@@ -29,45 +48,71 @@ Domain-specific solutions, while powerful for their intended use cases, typicall
 Meanwhile, general-purpose tools like Stan and JAX, despite their mathematical sophistication, can be challenging to use effectively without substantial programming expertise.
 Furthermore, the development of efficient algorithms and implementation patterns often falls to domain experts rather than being handled by dedicated numerical computing specialists, leading to potential inefficiencies and missed opportunities for optimization.
 
-This paper explores how Julia [@bezanson2017julia] may bridge this gap through its unique combination of high performance and intuitive syntax.
+This paper explores how Julia [@bezanson2017julia] may bridge this gap through its unique combination of high performance, composability, intuitive syntax, and robust scientific ecosystem.
 Through detailed examination of Julia's multiple dispatch system, native performance capabilities, and metaprogramming features, we demonstrate how the language could address core challenges in infectious disease modeling.
 Our analysis spans the implementation of differential equation models using the SciML ecosystem, Bayesian inference with Turing.jl, and the application of automatic differentiation for parameter estimation and sensitivity analysis.
 Using practical case studies in outbreak modeling, we show how Julia's coherent package ecosystem enables modelers to seamlessly combine traditionally separate computational approaches while maintaining code that is both efficient and accessible to domain experts, potentially transforming how we approach computational epidemiology.
 
 ## The Current Landscape of Infectious Disease Modeling
 
-### Computational Challenges in Modern IDM
-Discussion of the increasing complexity of models, need for rapid deployment during outbreaks, and computational bottlenecks in existing approaches.
+### Common Infectious Disease Modelling methods
+
+### Challenges in Modern IDM
+
+- Discussion of the increasing complexity of models, need for rapid deployment during outbreaks, and computational bottlenecks in existing approaches.
+- Lack of adoption of bayesian infectious disease modelling workflows
 
 ### Common Tools and Their Limitations
 Overview of R, Python, and other current tools, their strengths and limitations in the IDM context.
 
 ## Julia
 
-### Multiple Dispatch and Type System
-Discussion of how Julia's type system and multiple dispatch enable clear, performant model implementations and natural expression of epidemiological concepts.
+### The Language
 
-### Native Performance
-Exploration of how Julia achieves C-like performance while maintaining high-level syntax, with specific benefits for computationally intensive IDM tasks.
+- Multiple Dispatch and Type System
+- Native Performance
+- Metaprogramming
+- Package Interoperability
+- Interactive
+- Auto-differentation
 
-### Metaprogramming
-Overview of Julia's metaprogramming capabilities and their applications in model specification and domain-specific language creation.
+### The Ecosystem
 
-### Package Interoperability
-Discussion of Julia's package ecosystem design and how it enables seamless integration between different modeling components.
+#### The Scientific Machine Learning Ecosystem (SciML)
 
-## The Scientific Machine Learning Ecosystem
+#### Julia for Mathematical Programming (JuMP)
 
-### DifferentialEquations.jl and SciML
-Discussion of the comprehensive differential equation solving ecosystem, its unique features for IDM, and the broader scientific machine learning tools.
+#### Applied Category Theory in Julia (AlgebraicJulia)
 
-## Probabilistic Programming with Turing.jl
-Overview of Bayesian inference capabilities, MCMC samplers, and integration with differential equation models for parameter estimation.
+- EpiCats.jl
 
-## Automatic Differentiation
-Exploration of ForwardDiff.jl, ReverseDiff.jl, and Zygote.jl, with focus on their applications in optimization and sensitivity analysis for IDM.
+#### Probabilistic Programming
 
-## Data Science Tools
+##### Turing.jl
+
+##### Gen.jl and RxInfer.jl
+
+#### Model fitting
+
+- SciML for MLE
+- Turing for NUTs, PMCMC
+- Gen for SMC
+- Pigeons.jl parallel tempering - PPL agnostic
+- Others?
+
+#### Neural networks
+
+- Lux.jl https://lux.csail.mit.edu/stable/introduction/overview
+
+#### Automatic Differentiation
+
+- Able to switch to different auto differentiation approaches
+- Enables picking the one that works best for your problem
+- Also allows for benefiting from ongoing research as can swap in new options as they become available.
+- Forward differentiation and reverse differentiation
+- Enzyme, Mooncake
+
+### Data Science Tools
 
 Julia provides a comprehensive data science ecosystem that complements its scientific computing capabilities.
 DataFrames.jl and DataFramesMeta.jl offers powerful tabular data manipulation, while visualization libraries like Makie.jl.
@@ -121,72 +166,40 @@ Some or all of the case studies likely need to include real data to convince app
 
 ## Discussion
 
-**Summary of Findings**
-- Demonstrated Julia's unique position in scientific computing for IDM
-- Showed how the ecosystem components work together cohesively
-- Illustrated practical benefits through real-world case studies
+This paper has demonstrated Julia's potential to address key challenges in infectious disease modelling through its unique combination of performance, composability, and scientific ecosystem integration.
+Through examination of Julia's core features and practical case studies, we have shown how the language can bridge the gap between computational performance and accessibility for epidemiological applications.
 
-**Strengths**
-- True language-level composability between packages
-- No two-language problem: single codebase from prototyping to production
-- Rich type system enabling both safety and performance
-- Growing, academically-focused ecosystem
+<!-- Summary of key findings -->
+-   Demonstrated Julia's unique position in scientific computing for IDM through multiple dispatch, native performance, and seamless package interoperability
+-   Showed how ecosystem components work together cohesively, enabling "two-language problem" elimination from prototyping to production
+-   Illustrated practical benefits through case studies spanning differential equations, Bayesian inference, and automatic differentiation
 
-**Current Limitations**
-- Smaller package ecosystem compared to Python/R
-- Learning curve for developers from dynamically-typed backgrounds
-- Some IDM-specific tooling still missing
-- Package compilation times impact development workflow
+<!-- Strengths and limitations interwoven -->
+-   True language-level composability between packages enables rapid model development and component reuse, though requires learning curve for researchers familiar with monolithic approaches in R/Python
+-   Rich type system enabling both safety and performance facilitates systematic model validation, yet compilation times can impact interactive development workflow
+-   Growing, academically-focused ecosystem provides cutting-edge scientific computing tools, however IDM-specific tooling remains limited compared to established R/Python packages
+-   Native performance eliminates computational bottlenecks common in other high-level languages, but smaller community means fewer domain-specific examples and tutorials
 
-**Alternative Approaches in Literature**
+<!-- Comparison to literature - JAX and NumPyro -->
+While JAX offers automatic differentiation and acceleration, it remains a framework rather than a language solution, leading to limited expressiveness due to Python's underlying type system, restricted functional programming patterns, and complex deployment challenges.
+Julia's multiple dispatch provides more natural problem expression for epidemiological models, particularly when implementing complex infectious disease models with feedback loops, integrating real-time data streams for forecasting, or mixing deterministic and stochastic model components.
 
-*JAX and NumPyro*
-While JAX offers automatic differentiation and acceleration, it remains a framework rather than a language solution.
-This leads to:
-- Limited expressiveness due to Python's underlying type system
-- Restricted to purely functional programming patterns
-- Complex deployment due to Python packaging challenges
-- Less natural problem expression compared to Julia's multiple dispatch
-- Challenging to implement complex infectious disease models with feedback loops
-- Difficult to integrate real-time data streams for forecasting
-- Limited support for spatial modeling and contact networks
-- Constrained ability to mix deterministic and stochastic model components
+<!-- Comparison to literature - Stan and related tools -->
+Traditional probabilistic programming languages like Stan suffer from limited flexibility in model specification, separation between modelling and analysis environments, and performance overhead from interface translations.
+Julia's native probabilistic programming through Turing.jl addresses these limitations whilst supporting stochastic differential equations, discrete event simulation, and agent-based modelling approaches that are essential for comprehensive infectious disease analysis.
 
-*Stan and Related Tools*
-Traditional probabilistic programming languages suffer from:
-- Limited flexibility in model specification
-- Separation between modeling and analysis environments
-- Performance overhead from interface translations
-- Poor scaling for large-scale epidemic simulations
-- Difficulty implementing time-varying parameters for disease dynamics
-- Restricted ability to model complex intervention scenarios
-- Challenges in handling missing or partially observed epidemic data
-- Lack of support for stochastic differential equations and discrete event simulation
-- No native capability for agent-based or individual-based stochastic models
+<!-- Future work -->
+Areas for future work include developing a cohesive epidemiology metapackage that provides domain-specific abstractions for common IDM patterns whilst connecting to the broader Julia ecosystem.
+Priority areas include standardised interfaces for model specification, parameter estimation, intervention modelling, and real-time forecasting.
+Technical improvements needed include further reducing compilation latency, expanding GPU support across the ecosystem, and developing IDM-specific visualisation recipes alongside standardised benchmarks for IDM applications.
 
-**Future Work**
+<!-- Conclusions -->
+Julia represents a significant advance in scientific computing for IDM, offering a unique combination of performance, expressiveness, and composability that addresses fundamental limitations of both pipeline and monolithic modelling approaches.
+Whilst some challenges remain, the foundation is set for a robust, maintainable, and efficient approach to infectious disease modelling that can adapt to future computational and methodological advances.
+Action must be taken to provide the necessary support for Julia adoption in the IDM community including composable, interoperable, and performant tools, educational materials, and community engagement.
 
-*Epidemiology-Specific Ecosystem*
-Development of a cohesive epidemiology metapackage that:
-- Provides domain-specific abstractions for common IDM patterns
-- Connects to the broader Julia ecosystem (SciML, Turing.jl, etc.)
-- Includes standardized interfaces for:
-  * Model specification
-  * Parameter estimation
-  * Intervention modeling
-  * Real-time forecasting
+## Acknowledgements
 
-*Technical Improvements*
-- Further reducing compilation latency
-- Expanding GPU support across the ecosystem
-- Developing IDM-specific visualization recipes
-- Creating standardized benchmarks for IDM applications
-
-**Conclusions**
-
-Julia represents a significant advance in scientific computing for IDM, offering a unique combination of performance, expressiveness, and composability.
-While some challenges remain, the foundation is set for a robust, maintainable, and efficient approach to infectious disease modeling.
-The applied infectious disease modeling community is well-positioned to benefit from the growing Julia ecosystem, and the potential for a unified, efficient, and reproducible modeling approach is clear.
-Action must be taken to provide the necessary support for the adoption of Julia in the IDM community including composable, interoperable, and performant tools, educational materials, and community engagement.
-
-## References
+## References {.unnumbered}
+::: {#refs}
+:::
