@@ -6,9 +6,7 @@ author:
     email: "sam.abbott@lshtm.ac.uk"
     orcid: "0000-0001-8057-8037"
   - name: "Simon Frost"
-    affiliations:
-      - "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
-      - "Microsoft Discovery & Quantum"
+    affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
     email: "simon.frost@lshtm.ac.uk"
     orcid: "0000-0002-5207-9879"
   - name: "Sebastian Funk"
