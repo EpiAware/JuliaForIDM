@@ -1,14 +1,11 @@
-name: Build Paper
+name: Render and Deploy Paper
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-  merge_group:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    branches: [ main ]
+  workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -16,32 +13,117 @@ permissions:
   pages: write
   id-token: write
 
-jobs:
-  build-paper:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+# Allow only one concurrent build per branch, canceling in-progress runs when new commits are pushed.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
-      - name: Set up Quarto
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    outputs:
+      has-artifacts: ${{ steps.check-outputs.outputs.has-artifacts }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Julia
+        uses: julia-actions/install-juliaup@v2
+        with:
+          channel: '1.11'
+
+      - name: Cache Julia
+        uses: julia-actions/cache@v1
+        with:
+          cache-name: julia-cache-artifacts
+          cache-compiled: true
+
+      - name: Install Julia dependencies
+        run: |
+          julia --project=. -e '
+            using Pkg
+            Pkg.instantiate()
+            Pkg.precompile()
+          '
+
+      - name: Cache Quarto
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache
+            .quarto/project-cache
+            _freeze/
+            paper/.quarto/
+          key: ${{ runner.os }}-${{ github.ref_name }}-quarto-${{ hashFiles('paper/index.qmd', 'paper/_quarto.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.ref_name }}-quarto-
+            ${{ runner.os }}-main-quarto-
+
+      - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 1.4.549
+          version: "1.8.24"
+          tinytex: true
 
-      - name: Set up Julia
-        uses: julia-actions/setup-julia@v1
-        with:
-          version: "1.11"
-
-      - uses: julia-actions/cache@v1
-      - uses: julia-actions/julia-buildpkg@v1
-
-      - name: Render Paper
+      - name: Validate Quarto project
         run: |
           cd paper
-          quarto render paper.qmd
+          quarto check
 
-      - name: Upload PDF artifact
+      - name: Render Quarto project
+        run: |
+          cd paper
+          quarto render index.qmd --to pdf
+        env:
+          JULIA_NUM_THREADS: auto
+
+      - name: Check for outputs
+        id: check-outputs
+        run: |
+          outputs_exist="false"
+          if [ -f "paper/_output/index.html" ] || [ -f "paper/index.html" ]; then
+            outputs_exist="true"
+          fi
+          if [ -f "paper/_output/index.pdf" ] || [ -f "paper/index.pdf" ]; then
+            outputs_exist="true"
+          fi
+          echo "has-artifacts=$outputs_exist" >> $GITHUB_OUTPUT
+          echo "Found outputs: $outputs_exist"
+
+      - name: List generated files
+        run: |
+          echo "Generated files:"
+          find paper -name "*.html" -o -name "*.pdf" | head -20
+
+      - name: Upload artifacts
+        if: steps.check-outputs.outputs.has-artifacts == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: paper
-          path: paper/paper.pdf
+          name: paper-outputs-${{ github.sha }}
+          path: |
+            paper/_output/
+            paper/index.pdf
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Setup Pages
+        if: github.ref == 'refs/heads/main' && steps.check-outputs.outputs.has-artifacts == 'true'
+        uses: actions/configure-pages@v4
+
+      - name: Upload to GitHub Pages
+        if: github.ref == 'refs/heads/main' && steps.check-outputs.outputs.has-artifacts == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: paper/_output
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && needs.render.outputs.has-artifacts == 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: render
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
