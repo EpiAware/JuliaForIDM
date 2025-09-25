@@ -16,7 +16,7 @@ abstract: |
   Current approaches require either sacrificing performance for ease of use in high-level languages like R and Python, or accessibility for speed in low-level implementations.
   Domain-specific tools provide targeted solutions but lack integration with broader scientific computing advances, whilst general-purpose frameworks have steep learning curves, and often don't have all the features needed for applied infectious disease modelling.
   Julia addresses these challenges through its combination of multiple dispatch, native performance, and coherent scientific ecosystem.
-  We examine Julia's key features and summarise its ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, automatic differentiation, and data science tools.
+  We examine Julia's key features and summarise its ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, agent-based modeling, automatic differentiation, and data science tools.
   Through three case studies, we show how these components integrate to support complex epidemiological models.
   Julia offers a unique combination of performance, expressiveness, and composability that addresses limitations of both pipeline and monolithic modelling approaches.
 format:
@@ -35,10 +35,11 @@ execute:
   warning: false
   cache: true
 julia:
-  exeflags: ["--threads=4", "-O3"]
+  exeflags: ["+1.11.6", "--threads=4", "-O3"]
 ---
 
 ## Introduction
+
 Infectious disease modelling (IDM) plays a critical role in public health decision-making, from outbreak response to long-term planning.
 The field faces mounting challenges as models grow increasingly complex, incorporate a greater range of real-time data streams, and explore more intervention scenarios.
 This complexity manifests in both computational demands and code maintenance challenges, making it difficult to produce impactful work within the timescales that matter when responding rapidly to emerging threats.
@@ -60,7 +61,7 @@ Furthermore, the development of efficient algorithms and implementation patterns
 
 This paper explores how Julia [@bezanson2017julia] addresses these challenges through its design philosophy and scientific ecosystem.
 We examine Julia's key features, including multiple dispatch, native performance, and metaprogramming, that enable efficient implementation of epidemiological models whilst maintaining code accessibility.
-We summarise Julia's ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, automatic differentiation, and data science tools.
+We summarise Julia's ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, agent-based modeling, automatic differentiation, and data science tools.
 Through three case studies, we show how these components integrate to support complex epidemiological models.
 Finally, we discussion of Julia's potential to address current challenges in infectious disease modelling and directions for future work.
 
@@ -105,6 +106,12 @@ Finally, we discussion of Julia's potential to address current challenges in inf
 ### Neural networks
 
 - Lux.jl https://lux.csail.mit.edu/stable/introduction/overview
+
+### Agent-Based Modeling
+
+Agents.jl [@datseris2022agents] provides a comprehensive framework for agent-based modeling in Julia.
+The package offers high-performance simulations with minimal code complexity, supporting both continuous and discrete agent-based models.
+Its integration with the broader Julia ecosystem enables seamless incorporation of differential equations, optimisation, and statistical analysis within agent-based simulations, making it particularly valuable for epidemiological modeling where individual-level interactions drive population-level dynamics.
 
 ### Automatic Differentiation
 
@@ -176,7 +183,7 @@ Some or all of the case studies likely need to include real data to convince app
 
 This paper has examined Julia's capacity to address barriers in infectious disease modelling through its combination of performance, composability, and scientific ecosystem integration.
 We have outlined Julia's key features including multiple dispatch, native performance, and metaprogramming that enable efficient implementation of epidemiological models.
-We have summarised Julia's ecosystem spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, automatic differentiation, and data science tools that integrate to create a coherent environment for model development.
+We have summarised Julia's ecosystem spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, agent-based modeling, automatic differentiation, and data science tools that integrate to create a coherent environment for model development.
 Through our case studies, we have shown how these components support compartmental models with time-varying transmission, combining deterministic dynamics with stochastic processes and Bayesian inference.
 While challenges remain in compilation times and community size, Julia provides a coherent approach to infectious disease modelling that eliminates the traditional trade-off between accessibility and performance.
 
