@@ -5,6 +5,12 @@ author:
     affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
     email: "sam.abbott@lshtm.ac.uk"
     orcid: "0000-0001-8057-8037"
+  - name: "Simon Frost"
+    affiliations:
+      - "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+      - "Microsoft Discovery & Quantum"
+    email: "simon.frost@lshtm.ac.uk"
+    orcid: "0000-0002-5207-9879"
   - name: "Sebastian Funk"
     affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
     email: "sebastian.funk@lshtm.ac.uk"
@@ -83,6 +89,8 @@ Finally, we discussion of Julia's potential to address current challenges in inf
 ### Applied Category Theory in Julia (AlgebraicJulia)
 
 - EpiCats.jl
+
+Applied epidemiological models can become complex, incorporating heterogeneities such as age, risk factors, and spatial location, which can make these models difficult to understand, and difficult to debug if the model does not behave as expected. One solution to this problem is to build complex models from simpler ones, with the idea that small, simple models can be understood. Applied category theory (ACT) has been proposed as one mechanism that can 'add' models together, e.g. adding a transition from susceptibles to immune to model vaccination, as well as 'multiply' models, for example combining an SIR model with a model of age classes to generate an age-structured model. The mathematics underlying ACT provide guarantees that the resulting models are correct by construction, while the ability to build up a model incrementally provides a clearer understanding of the model assumptions.
 
 ### Turing.jl
 
