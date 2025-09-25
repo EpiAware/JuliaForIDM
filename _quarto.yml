@@ -1,0 +1,27 @@
+project:
+  type: manuscript
+  output-dir: _output
+
+manuscript:
+  article: paper/index.qmd
+
+format:
+  pdf:
+    documentclass: article
+    geometry: margin=1in
+    fontsize: 11pt
+    linestretch: 1.5
+    keep-tex: false
+    number-sections: true
+    colorlinks: true
+
+bibliography: paper/library.bib
+csl: https://www.zotero.org/styles/plos-computational-biology
+
+execute:
+  echo: true
+  warning: false
+  cache: true
+
+julia:
+  exeflags: ["+1.11.6", "--threads=4", "-O3"]

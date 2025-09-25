@@ -32,3 +32,4 @@ Thumbs.db
 *.lcov
 resources
 claude.md
+**/*.quarto_ipynb

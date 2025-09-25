@@ -1,0 +1,46 @@
+version: '3'
+
+tasks:
+  default:
+    desc: "Render the paper (main development task)"
+    deps: [instantiate]
+    cmds:
+      - quarto render
+
+  install-julia:
+    desc: "Install Julia 1.11.6 using juliaup"
+    cmds:
+      - juliaup install 1.11.6
+    status:
+      - juliaup status | grep -q "1.11.6"
+
+  instantiate:
+    desc: "Activate and instantiate the Julia project environment"
+    deps: [install-julia]
+    cmds:
+      - julia +1.11.6 -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate()"
+    sources:
+      - Project.toml
+      - Manifest.toml
+    generates:
+      - LocalPreferences.toml
+
+  repl:
+    desc: "Launch Julia REPL with project environment active"
+    deps: [instantiate]
+    cmds:
+      - julia +1.11.6 -i -e "using Pkg; Pkg.activate(\".\")"
+    interactive: true
+
+  preview:
+    desc: "Preview the paper with live reload"
+    deps: [instantiate]
+    cmds:
+      - quarto preview
+    interactive: true
+
+  test:
+    desc: "Run Julia tests"
+    deps: [instantiate]
+    cmds:
+      - julia +1.11.6 -e "using Pkg; Pkg.activate(\".\"); Pkg.test()"

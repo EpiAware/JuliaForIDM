@@ -67,13 +67,11 @@ jobs:
 
       - name: Validate Quarto project
         run: |
-          cd paper
           quarto check
 
       - name: Render Quarto project
         run: |
-          cd paper
-          quarto render index.qmd --to pdf
+          quarto render
         env:
           JULIA_NUM_THREADS: auto
 
@@ -81,10 +79,10 @@ jobs:
         id: check-outputs
         run: |
           outputs_exist="false"
-          if [ -f "paper/_output/index.html" ] || [ -f "paper/index.html" ]; then
+          if [ -f "_output/index.html" ] || [ -f "index.html" ]; then
             outputs_exist="true"
           fi
-          if [ -f "paper/_output/index.pdf" ] || [ -f "paper/index.pdf" ]; then
+          if [ -f "_output/index.pdf" ] || [ -f "index.pdf" ]; then
             outputs_exist="true"
           fi
           echo "has-artifacts=$outputs_exist" >> $GITHUB_OUTPUT
@@ -93,7 +91,8 @@ jobs:
       - name: List generated files
         run: |
           echo "Generated files:"
-          find paper -name "*.html" -o -name "*.pdf" | head -20
+          find _output -name "*.html" -o -name "*.pdf" | head -20 || echo "No _output directory found"
+          find . -maxdepth 1 -name "*.html" -o -name "*.pdf" | head -20
 
       - name: Upload artifacts
         if: steps.check-outputs.outputs.has-artifacts == 'true'
@@ -101,8 +100,8 @@ jobs:
         with:
           name: paper-outputs-${{ github.sha }}
           path: |
-            paper/_output/
-            paper/index.pdf
+            _output/
+            index.pdf
           retention-days: 30
           if-no-files-found: warn
 
@@ -114,7 +113,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && steps.check-outputs.outputs.has-artifacts == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: paper/_output
+          path: _output
 
   deploy:
     if: github.ref == 'refs/heads/main' && needs.render.outputs.has-artifacts == 'true'
