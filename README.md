@@ -1,8 +1,6 @@
 # Julia for Applied Infectious Disease Modelling
 
 [![Build Status](https://github.com/seabbs/JuliaForIDM/workflows/CI/badge.svg)](https://github.com/seabbs/JuliaForIDM/actions)
-[![Coverage](https://codecov.io/gh/seabbs/JuliaForIDM/branch/main/graph/badge.svg)](https://codecov.io/gh/seabbs/JuliaForIDM)
-[![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 [![Citation](https://img.shields.io/badge/Cite-CFF-blue)](https://github.com/EpiAware/JuliaForIDM/blob/main/CITATION.cff)
 
 ## Abstract
@@ -12,7 +10,7 @@ The field faces mounting challenges as models grow increasingly complex, incorpo
 Current approaches require either sacrificing performance for ease of use in high-level languages like R and Python, or accessibility for speed in low-level implementations.
 Domain-specific tools provide targeted solutions but lack integration with broader scientific computing advances, whilst general-purpose frameworks have steep learning curves, and often don't have all the features needed for applied infectious disease modelling.
 Julia addresses these challenges through its combination of multiple dispatch, native performance, and coherent scientific ecosystem.
-We examine Julia's key features and summarise its ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, automatic differentiation, and data science tools.
+We examine Julia's key features and summarise its ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, agent-based modeling, automatic differentiation, and data science tools.
 Through three case studies, we show how these components integrate to support complex epidemiological models.
 Julia offers a unique combination of performance, expressiveness, and composability that addresses limitations of both pipeline and monolithic modelling approaches.
 
@@ -56,7 +54,7 @@ Available tasks:
 
 1. Install Julia 1.11+ (we expect any version of 1.11 to work well):
    ```bash
-   juliaup install 1.11.6
+   juliaup add 1.11.6
    ```
 
 2. Set up Julia environment:
