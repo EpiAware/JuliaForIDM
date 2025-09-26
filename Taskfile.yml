@@ -11,6 +11,7 @@ tasks:
     desc: "Install Julia 1.11.7 using juliaup"
     cmds:
       - juliaup add 1.11.7
+      - juliaup override set 1.11.7
     status:
       - juliaup status | grep -q "1.11.7"
 

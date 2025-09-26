@@ -54,12 +54,13 @@ Available tasks:
 
 1. Install Julia 1.11+ (we expect any version of 1.11 to work well):
    ```bash
-   juliaup add 1.11.6
+   juliaup add 1.11.7
+   juliaup override set 1.11.7
    ```
 
 2. Set up Julia environment:
    ```bash
-   julia +1.11.6
+   julia
    ```
 
    Then in the Julia REPL:
