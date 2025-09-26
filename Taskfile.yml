@@ -3,7 +3,7 @@ version: '3'
 tasks:
   default:
     desc: "Render the paper (main development task)"
-    deps: [instantiate]
+    deps: [instantiate, install-extensions]
     cmds:
       - quarto render
 
@@ -25,6 +25,13 @@ tasks:
       - Manifest.toml
     generates:
       - LocalPreferences.toml
+
+  install-extensions:
+    desc: "Install Quarto extensions"
+    cmds:
+      - quarto add kapsner/authors-block --no-prompt
+    status:
+      - test -d _extensions/kapsner/authors-block
 
   repl:
     desc: "Launch Julia REPL with project environment active"

@@ -27,5 +27,5 @@ execute:
   cache: true
   freeze: auto
 
-julia: 
-  exeflags: ["+1.11.7", "--threads=4", "-O3"]
+julia:
+  exeflags: ["--threads=4", "-O3"]

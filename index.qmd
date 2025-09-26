@@ -1,18 +1,30 @@
 ---
 title: "Julia for Applied Infectious Disease Modelling"
-author:
+authors:
   - name: "Sam Abbott"
-    affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+    affiliations:
+      - ref: lshtm
     email: "sam.abbott@lshtm.ac.uk"
     orcid: "0000-0001-8057-8037"
+    corresponding: true
   - name: "Simon Frost"
-    affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+    affiliations:
+      - ref: lshtm
     email: "simon.frost@lshtm.ac.uk"
     orcid: "0000-0002-5207-9879"
   - name: "Sebastian Funk"
-    affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+    affiliations:
+      - ref: lshtm
     email: "sebastian.funk@lshtm.ac.uk"
     orcid: "0000-0002-2842-3406"
+
+affiliations:
+  - id: lshtm
+    name: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+
+filters:
+  - authors-block
+
 abstract: |
   Infectious disease modelling plays a critical role in public health decision-making, from outbreak response to long-term planning.
   The field faces mounting challenges as models grow increasingly complex, incorporate greater ranges of real-time data streams, and explore more intervention scenarios.

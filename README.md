@@ -26,6 +26,9 @@ Julia offers a unique combination of performance, expressiveness, and composabil
 
 Follow the instructions at [quarto.org](https://quarto.org/docs/get-started/) to install Quarto.
 
+**Extensions Used:**
+- [authors-block](https://github.com/kapsner/authors-block): Enhanced author information formatting with institutional affiliations and ORCID integration
+
 ### 2. Julia
 
 Follow the instructions at [juliaup](https://github.com/JuliaLang/juliaup) to install Julia using the official Julia version manager.
@@ -58,7 +61,12 @@ Available tasks:
    juliaup override set 1.11.7
    ```
 
-2. Set up Julia environment:
+2. Install Quarto extensions:
+   ```bash
+   quarto add kapsner/authors-block --no-prompt
+   ```
+
+3. Set up Julia environment:
    ```bash
    julia
    ```
@@ -70,7 +78,7 @@ Available tasks:
    Pkg.instantiate()
    ```
 
-3. Render the paper:
+4. Render the paper:
    ```bash
    quarto render
    ```
