@@ -12,6 +12,9 @@
 /_site/
 paper/_output/
 
+# Task runner cache
+.task/
+
 # OS generated files
 .DS_Store
 .DS_Store?
