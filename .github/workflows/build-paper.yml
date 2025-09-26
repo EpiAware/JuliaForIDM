@@ -30,7 +30,7 @@ jobs:
       - name: Setup Julia
         uses: julia-actions/install-juliaup@v2
         with:
-          channel: '1.11'
+          channel: '1.11.7'
 
       - name: Cache Julia
         uses: julia-actions/cache@v1
@@ -53,8 +53,7 @@ jobs:
             .cache
             .quarto/project-cache
             _freeze/
-            paper/.quarto/
-          key: ${{ runner.os }}-${{ github.ref_name }}-quarto-${{ hashFiles('paper/index.qmd', 'paper/_quarto.yml') }}
+          key: ${{ runner.os }}-${{ github.ref_name }}-quarto-${{ hashFiles('index.qmd', '_quarto.yml') }}
           restore-keys: |
             ${{ runner.os }}-${{ github.ref_name }}-quarto-
             ${{ runner.os }}-main-quarto-

@@ -13,7 +13,6 @@ author:
     affiliation: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
     email: "sebastian.funk@lshtm.ac.uk"
     orcid: "0000-0002-2842-3406"
-date: today
 abstract: |
   Infectious disease modelling plays a critical role in public health decision-making, from outbreak response to long-term planning.
   The field faces mounting challenges as models grow increasingly complex, incorporate greater ranges of real-time data streams, and explore more intervention scenarios.
@@ -23,23 +22,6 @@ abstract: |
   We examine Julia's key features and summarise its ecosystem for infectious disease modelling, spanning the SciML ecosystem, JuMP, AlgebraicJulia, Turing.jl, Gen.jl and RxInfer.jl, other model fitting options, neural networks, agent-based modeling, automatic differentiation, and data science tools.
   Through three case studies, we show how these components integrate to support complex epidemiological models.
   Julia offers a unique combination of performance, expressiveness, and composability that addresses limitations of both pipeline and monolithic modelling approaches.
-format:
-  pdf:
-    documentclass: article
-    geometry: margin=1in
-    fontsize: 11pt
-    linestretch: 1.5
-    keep-tex: false
-    number-sections: true
-    colorlinks: true
-bibliography: library.bib
-csl: https://www.zotero.org/styles/plos-computational-biology
-execute:
-  echo: true
-  warning: false
-  cache: true
-julia:
-  exeflags: ["+1.11.6", "--threads=4", "-O3"]
 ---
 
 ## Introduction

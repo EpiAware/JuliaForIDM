@@ -7,18 +7,18 @@ tasks:
     cmds:
       - quarto render
 
-  install-julia:
-    desc: "Install Julia 1.11.6 using juliaup"
+  install:
+    desc: "Install Julia 1.11.7 using juliaup"
     cmds:
-      - juliaup install 1.11.6
+      - juliaup add 1.11.7
     status:
-      - juliaup status | grep -q "1.11.6"
+      - juliaup status | grep -q "1.11.7"
 
   instantiate:
     desc: "Activate and instantiate the Julia project environment"
-    deps: [install-julia]
+    deps: [install]
     cmds:
-      - julia +1.11.6 -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate()"
+      - julia +1.11.7 -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate()"
     sources:
       - Project.toml
       - Manifest.toml
@@ -29,7 +29,7 @@ tasks:
     desc: "Launch Julia REPL with project environment active"
     deps: [instantiate]
     cmds:
-      - julia +1.11.6 -i -e "using Pkg; Pkg.activate(\".\")"
+      - julia +1.11.7 -i -e "using Pkg; Pkg.activate(\".\")"
     interactive: true
 
   preview:
@@ -43,4 +43,4 @@ tasks:
     desc: "Run Julia tests"
     deps: [instantiate]
     cmds:
-      - julia +1.11.6 -e "using Pkg; Pkg.activate(\".\"); Pkg.test()"
+      - julia +1.11.7 -e "using Pkg; Pkg.activate(\".\"); Pkg.test()"
