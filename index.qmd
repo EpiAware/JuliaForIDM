@@ -213,6 +213,7 @@ CensoredDistributions.jl is a pure Julia version of the same solution [@censored
 The package integrates natively with Turing.jl and other Julia PPLs, eliminating the need for language-specific implementations.
 It uses the SciML ecosystem for solving numerical integrals which works both when used as a standalone package and within a Turing.jl model.
 In contrast, the Stan and R implementations need to use different solvers with the Stan implementation having to be recast into an ODE in order to work within the Stan ecosystem.
+In addition to these scientific benefits, the package can make use of the standard Julia software development tools for unit testing, and documentation both of which can be challenging in less full-featured PPLs such as Stan.
 
 <!-- Future work -->
 Areas for future work include developing a cohesive epidemiology metapackage that provides domain-specific abstractions for common IDM patterns whilst connecting to the broader Julia ecosystem.
