@@ -1,6 +1,6 @@
 # Julia for Applied Infectious Disease Modelling
 
-[![Build Status](https://github.com/seabbs/JuliaForIDM/workflows/CI/badge.svg)](https://github.com/seabbs/JuliaForIDM/actions)
+[![Render and Deploy Paper](https://github.com/EpiAware/JuliaForIDM/actions/workflows/build-paper.yml/badge.svg)](https://github.com/EpiAware/JuliaForIDM/actions/workflows/build-paper.yml)
 [![Citation](https://img.shields.io/badge/Cite-CFF-blue)](https://github.com/EpiAware/JuliaForIDM/blob/main/CITATION.cff)
 
 ## Abstract
