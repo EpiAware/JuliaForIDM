@@ -10,6 +10,7 @@ authors:
   - name: "Simon Frost"
     affiliations:
       - ref: lshtm
+      - ref: microsoft
     email: "simon.frost@lshtm.ac.uk"
     orcid: "0000-0002-5207-9879"
   - name: "Sebastian Funk"
@@ -21,6 +22,8 @@ authors:
 affiliations:
   - id: lshtm
     name: "Centre for Mathematical Modelling of Infectious Diseases, London School of Hygiene & Tropical Medicine"
+  - id: microsoft
+    name: "Microsoft Discovery & Quantum, Microsoft"
 
 filters:
   - authors-block
