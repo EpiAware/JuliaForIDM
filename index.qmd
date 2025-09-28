@@ -85,7 +85,9 @@ Finally, we discussion of Julia's potential to address current challenges in inf
 
 - EpiCats.jl
 
-Applied epidemiological models can become complex, incorporating heterogeneities such as age, risk factors, and spatial location, which can make these models difficult to understand, and difficult to debug if the model does not behave as expected. One solution to this problem is to build complex models from simpler ones, with the idea that small, simple models can be understood. Applied category theory (ACT) has been proposed as one mechanism that can 'add' models together, e.g. adding a transition from susceptibles to immune to model vaccination, as well as 'multiply' models, for example combining an SIR model with a model of age classes to generate an age-structured model. The mathematics underlying ACT provide guarantees that the resulting models are correct by construction, while the ability to build up a model incrementally provides a clearer understanding of the model assumptions.
+Applied epidemiological models can become complex, incorporating heterogeneities such as age, risk factors, and spatial location, which can make these models difficult to understand, and difficult to debug if the model does not behave as expected. One solution to this problem is to build complex models from simpler ones, with the idea that small, simple models can be understood. Applied category theory (ACT) has been proposed as one mechanism that can 'add' models together, e.g. adding a transition from susceptibles to immune to model vaccination, as well as 'multiply' models, for example combining an SIR model with a model of age classes to generate an age-structured model. The mathematics underlying ACT provide guarantees that the resulting models are correct by construction, while the ability to build up a model incrementally provides a clearer understanding of the model assumptions. ACT was originally applied to composing ordinary and delay differential equation models, as well as difference equation models.
+
+A central data structure in AlgebraicJulia is the attributed C-set (`ACSet`, pronounced 'ah-chet'), a joint generalization of a graph and a dataframe. ACSets have been used to represent Petri net models as well as stock-and-flow models, in addition to other areas where problems can be represented as wiring diagrams, including optimization, optimal control, databases, and planning.
 
 ### Turing.jl
 
@@ -98,6 +100,8 @@ Applied epidemiological models can become complex, incorporating heterogeneities
 - Other cool stuff?
 
 ### Gen.jl and RxInfer.jl
+
+In addition to Turing.jl, there are other probabilistic programming languages in Julia that take a different approach to Turing.jl.
 
 - Gen.jl [@cusumano2019gen]
 
