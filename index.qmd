@@ -7,6 +7,11 @@ authors:
     email: "sam.abbott@lshtm.ac.uk"
     orcid: "0000-0001-8057-8037"
     corresponding: true
+  - name: "Sandra Montes-Olivas"
+    affiliations:
+      - ref: lshtm
+    email: "sandra.montes-olivas@lshtm.ac.uk"
+    orcid: "0000-0002-7415-3558"
   - name: "Simon Frost"
     affiliations:
       - ref: lshtm
@@ -80,6 +85,20 @@ Finally, we discussion of Julia's potential to address current challenges in inf
 ### The Scientific Machine Learning Ecosystem (SciML)
 
 ### Julia for Mathematical Programming (JuMP)
+
+- JuMP.jl
+
+Nonlinear programming (NLP) problems, which involve minimising nonlinear objective functions subject to nonlinear equality and inequality constraints, have found widespread applications in scientific computing, engineering design, and optimal control (TODO: add refs). They are capable of addressing complex system dynamics, multiple interdependent constraints, and time-varying models. Although NLPs are not yet extensively used in optimising epidemic control strategies, they hold significant potential by facilitating the modelling of nonlinear epidemic dynamics and the identification of optimal intervention policies [@montesolivas2025]. However, the resulting optimisation landscapes are often nonconvex, presenting significant computational challenges that require robust numerical treatment to identify a solution. Solving these complex problems efficiently requires high-performance optimisation solvers. These are software libraries written in compiled languages, such as C, C++, or Fortran.
+
+For nonlinear problems, tools like IPOPT [@wachter2006], KNITRO [@byrd2006] are designed to tackle large-scale challenges where most variables are unrelated (sparse problems). They work by pairing advanced algorithms, such as interior-point methods, with fast linear algebra libraries. Even solvers focused on different problem types, like the linear programming solver HiGHS [@huangfu2018], are built on the same core principles of high-speed computation.
+
+The main advantage of this approach is its performance. It enables the specialised solver to manage demanding calculations effectively, such as factoring large matrices and conducting iterative searches, using highly optimised, compiled code. This capability makes it feasible to solve complex real-world problems that would otherwise be too difficult to compute.
+
+A common practice in scientific computing is to access these solvers from high-level environments such as R, Julia, or Python [@bezanson_2017]. Through low-level C interfaces, the solvers can be "wrapped," allowing users to define models within an interactive, high-level language. However, the characteristics of this wrapper and the surrounding ecosystem are important factors that influence the accessibility, efficiency, and reproducibility of the research, as implementation details can vary significantly across different environments. 
+
+The R ecosystem, for example, requires a more manual approach. The interface is handled by the ipoptr package, which, having not been officially updated since 2012, is no longer distributed on the main CRAN repository. Installation, therefore, requires users to manually compile the wrapper from the Ipopt source code, a process that can be sensitive to the specific toolchain and libraries on the user's system. Beyond the installation challenges, the problem definition itself requires the user to implement separate functions for the objective, constraints, and their derivatives, as well as the sparse structure of the Jacobian and Hessian matrices. This manual specification process can lead to lengthy code and increase the potential for implementation errors.
+
+In contrast, the Julia programming language provides a different workflow for mathematical optimisation. The ecosystem is designed around composable packages: the modelling language JuMP.jl is used to state the problem, while a separate solver package, such as Ipopt.jl, provides the interface to the solver itself. Julia's built-in package manager streamlines the installation process by automatically downloading the necessary pre-compiled solver binaries. The JuMP syntax allows users to define NLPs using a symbolic representation that closely resembles the standard mathematical formulation. The framework can then automate the computation of sparse Jacobian and Hessian matrices required by the solver through automatic differentiation (AD). This level of abstraction from the solver's API streamlines the modelling process and permits the user to focus on the high-level mathematical formulation of the problem rather than on low-level implementation details.
 
 ### Applied Category Theory in Julia (AlgebraicJulia)
 
